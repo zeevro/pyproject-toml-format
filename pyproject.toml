@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyproject-toml-format"
+description = "Add your description here"
+requires-python = ">=3.9"
+authors = [{ name = "Zeev Rotshtein", email = "zeevro@gmail.com" }]
+license = { file = "LICENSE" }
+dependencies = [
+    "packaging",
+    "tomlkit",
+]
+dynamic = ["version"]
+
+[project.urls]
+Source = "https://github.com/zeevro/pyproject-toml-format"
+
+[project.scripts]
+pyproject-toml-format = "pyproject_toml_format.__main__:main"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.ruff]
+line-length = 250
+output-format = "concise"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "W191",  # conflicts with formatter
+    "E111",  # conflicts with formatter
+    "E114",  # conflicts with formatter
+    "E117",  # conflicts with formatter
+    "D206",  # conflicts with formatter
+    "D300",  # conflicts with formatter
+    "Q000",  # conflicts with formatter
+    "Q001",  # conflicts with formatter
+    "Q002",  # conflicts with formatter
+    "Q003",  # conflicts with formatter
+    "COM812",  # conflicts with formatter
+    "COM819",  # conflicts with formatter
+    "ISC001",  # conflicts with formatter
+    "ISC002",  # conflicts with formatter
+    "E501",  # line-too-long - see formatter documentation
+
+    "D",  # pydocstyle
+    'C90',
+    'PLR0912',
+    'ERA',
+    'T201',
+    'ANN',
+    'BLE001',
+    'SLF001',
+]
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+lines-after-imports = 2
+
+[tool.ruff.format]
+quote-style = "single"

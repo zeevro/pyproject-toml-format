@@ -1,0 +1,41 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-toml
+      - id: check-yaml
+      - id: debug-statements
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.22
+    hooks:
+      - id: validate-pyproject
+        additional_dependencies:
+          - validate-pyproject[all]
+          - validate-pyproject-schema-store
+
+  - repo: local
+    hooks:
+      - id: pyproject-toml-format
+        name: Format pyproject.toml
+        entry: pyproject-toml-format
+        language: python
+        files: ^pyproject\.toml$
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.3
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/Mateusz-Grzelinski/actionlint-py
+    rev: v1.7.4.18
+    hooks:
+      - id: actionlint
+        additional_dependencies: [pyflakes>=3.0.1]
+        args: [-shellcheck=]

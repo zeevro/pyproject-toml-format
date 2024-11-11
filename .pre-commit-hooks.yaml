@@ -1,0 +1,5 @@
+- id: pyproject-toml-format
+  name: Format pyproject.toml
+  entry: pyproject-toml-format
+  language: python
+  files: ^pyproject\.toml$
