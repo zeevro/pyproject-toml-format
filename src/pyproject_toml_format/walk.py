@@ -1,10 +1,9 @@
-from dataclasses import asdict
 from functools import reduce
 from operator import getitem
 
 import tomlkit
 from tomlkit.container import Container
-from tomlkit.items import AbstractTable, AoT, Array, Comment, Item, Whitespace, _ArrayItemGroup, Key
+from tomlkit.items import AbstractTable, AoT, Array, Key
 
 
 def cannonicalize_key(k: Key | str | int) -> str | int:
