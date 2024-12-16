@@ -125,6 +125,8 @@ def main() -> None:
             continue
         it = x.items() if isinstance(x, Mapping) else enumerate(x)
         for k, v in it:
+            if not isinstance(v, str):
+                continue
             if v != (f := format_requirement(v)):
                 modified = True
                 x[k] = f
