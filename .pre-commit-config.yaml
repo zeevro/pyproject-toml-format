@@ -19,7 +19,15 @@ repos:
     hooks:
       - id: pyproject-toml-format
         name: Format pyproject.toml
-        entry: pyproject-toml-format
+        entry: python
+        args:
+          - -c
+          - |
+            import sys
+            sys.path.insert(0, 'src')
+            from pyproject_toml_format.cli import main
+            main()
+        additional_dependencies: [packaging, tomlkit]
         language: python
         files: ^pyproject\.toml$
 
