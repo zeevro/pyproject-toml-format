@@ -16,9 +16,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version-file: pyproject.toml
-
       - name: Run pre-commit
-        uses: pre-commit/action@v3.0.1
+        uses: zeevro/action-pre-commit-uv@main # TODO: Replace with tox-dev/action-pre-commit-uv once PR is merged
