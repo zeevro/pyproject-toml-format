@@ -53,9 +53,9 @@ def format_requirement(r: str) -> str:
     req = Requirement(r)
     ret = canonicalize_name(req.name, validate=True)
     if req.extras:
-        ret += f"[{','.join(sorted(e.lower() for e in req.extras))}]"
+        ret += f'[{",".join(sorted(e.lower() for e in req.extras))}]'
     if req.specifier:
-        ret += f" {','.join(str(s) for s in sorted(req.specifier, key=lambda s: (_OP_ORDER[s.operator], s.version)))}"
+        ret += f' {",".join(str(s) for s in sorted(req.specifier, key=lambda s: (_OP_ORDER[s.operator], s.version)))}'
     elif req.url:
         ret += f' @ {req.url}'
     if req.marker:
