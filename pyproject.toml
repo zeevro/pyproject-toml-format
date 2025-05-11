@@ -14,6 +14,9 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+ruff = ["ruff"]
+
 [project.urls]
 Source = "https://github.com/zeevro/pyproject-toml-format"
 
@@ -30,30 +33,27 @@ output-format = "concise"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "W191",  # conflicts with formatter
-    "E111",  # conflicts with formatter
-    "E114",  # conflicts with formatter
-    "E117",  # conflicts with formatter
-    "D206",  # conflicts with formatter
-    "D300",  # conflicts with formatter
-    "Q000",  # conflicts with formatter
-    "Q001",  # conflicts with formatter
-    "Q002",  # conflicts with formatter
-    "Q003",  # conflicts with formatter
-    "COM812",  # conflicts with formatter
-    "COM819",  # conflicts with formatter
-    "ISC001",  # conflicts with formatter
-    "ISC002",  # conflicts with formatter
-    "E501",  # line-too-long - see formatter documentation
+    "W191", # tab-indentation - conflicts with formatter
+    "E111", # indentation-with-invalid-multiple - conflicts with formatter
+    "E114", # indentation-with-invalid-multiple-comment - conflicts with formatter
+    "E117", # over-indented - conflicts with formatter
+    "D206", # indent-with-spaces - conflicts with formatter
+    "D300", # triple-single-quotes - conflicts with formatter
+    "Q000", # bad-quotes-inline-string - conflicts with formatter
+    "Q001", # bad-quotes-multiline-string - conflicts with formatter
+    "Q002", # bad-quotes-docstring - conflicts with formatter
+    "Q003", # avoidable-escaped-quote - conflicts with formatter
+    "COM812", # missing-trailing-comma - conflicts with formatter
+    "COM819", # prohibited-trailing-comma - conflicts with formatter
+    "E501", # line-too-long - see formatter documentation
 
-    "D",  # pydocstyle
-    'C90',
-    'PLR0912',
-    'ERA',
-    'T201',
-    'ANN',
-    'BLE001',
-    'SLF001',
+    "ERA", # linter: eradicate
+    "C90", # linter: mccabe
+    "D", # linter: pydocstyle
+
+    "T201", # print
+    "SLF001", # private-member-access
+    "PLR0912", # too-many-branches
 ]
 
 [tool.ruff.lint.isort]

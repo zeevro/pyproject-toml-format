@@ -5,17 +5,21 @@ from collections.abc import Callable, Generator, Iterable, Mapping
 from difflib import unified_diff
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Any, Literal, TextIO
+from typing import TYPE_CHECKING, Literal, TextIO, TypeVar
 
 from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name
 import tomlkit
 from tomlkit.items import Item, String, _ArrayItemGroup
 
+from pyproject_toml_format._ruff import format_ruff_lint_ignore
+
 
 if TYPE_CHECKING:
     from tomlkit.container import Container
 
+
+_T = TypeVar('_T')
 
 _OP_ORDER = {op: i for i, op in enumerate(['~=', '==', '===', '>', '>=', '<=', '<', '!='])}
 
@@ -74,7 +78,7 @@ class UnmovableItem:
         return False
 
 
-def array_sort_key(x: _ArrayItemGroup, key: Callable[[str], Any] = str) -> Any:
+def array_sort_key(x: _ArrayItemGroup, key: Callable[[str], _T] = str) -> _T | UnmovableItem:
     if isinstance(x.value, String):
         return key(x.value)
     return UnmovableItem()
@@ -85,6 +89,7 @@ def main() -> None:
     p.add_argument('-c', '--check', action='store_true')
     p.add_argument('-d', '--diff', action='store_true')
     p.add_argument('--no-sort', action='store_true')
+    p.add_argument('--no-ruff', action='store_true')
     p.add_argument('path', nargs='?', type=pathlib.Path)
 
     if TYPE_CHECKING:
@@ -93,6 +98,7 @@ def main() -> None:
             check: bool
             diff: bool
             no_sort: bool
+            no_ruff: bool
             path: pathlib.Path | type[Pipe] | None
 
         args = Args()
@@ -136,6 +142,9 @@ def main() -> None:
         x._value.sort(key=lambda v: array_sort_key(v, lambda r: Requirement(r).name))
         if x._value != t:
             modified = True
+
+    if not args.no_ruff:
+        modified = format_ruff_lint_ignore(doc) or modified
 
     if not modified:
         return

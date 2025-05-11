@@ -8,7 +8,7 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.23
+    rev: v0.24.1
     hooks:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject[all,store]"]
@@ -25,12 +25,12 @@ repos:
             sys.path.insert(0, 'src')
             from pyproject_toml_format.cli import main
             main()
-        additional_dependencies: [packaging, tomlkit]
+        additional_dependencies: [packaging, tomlkit, ruff]
         language: python
         files: ^pyproject\.toml$
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.10
+    rev: v0.11.9
     hooks:
       - id: ruff
         args: [--fix]
