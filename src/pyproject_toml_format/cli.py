@@ -68,6 +68,9 @@ def format_requirement(r: str) -> str:
 
 
 class UnmovableItem:
+    def __hash__(self) -> int:
+        return 0
+
     def __eq__(self, other: object) -> bool:
         return True
 
