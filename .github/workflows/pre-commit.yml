@@ -14,7 +14,7 @@ jobs:
     name: Run pre-commit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run pre-commit
         uses: tox-dev/action-pre-commit-uv@v1
