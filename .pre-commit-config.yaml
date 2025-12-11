@@ -17,17 +17,10 @@ repos:
     hooks:
       - id: pyproject-toml-format
         name: Format pyproject.toml
-        entry: python
-        args:
-          - -c
-          - |
-            import sys
-            sys.path.insert(0, 'src')
-            from pyproject_toml_format.cli import main
-            main()
-        additional_dependencies: [packaging, tomlkit, ruff]
+        entry: pyproject-toml-format
         language: python
         files: ^pyproject\.toml$
+        additional_dependencies: [".[ruff]"]
 
   - repo: https://github.com/ComPWA/taplo-pre-commit
     rev: v0.9.3
