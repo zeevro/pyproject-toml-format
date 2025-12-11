@@ -1,11 +1,17 @@
+from __future__ import annotations
+
 import importlib.util
 import io
 import json
 import subprocess
 import sys
-from typing import NotRequired, TypedDict, cast
+from typing import TYPE_CHECKING, TypedDict, cast
 
 import tomlkit.items
+
+
+if TYPE_CHECKING:
+    from typing import NotRequired
 
 
 class LinterCategory(TypedDict):
