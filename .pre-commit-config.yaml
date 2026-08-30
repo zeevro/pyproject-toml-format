@@ -17,10 +17,10 @@ repos:
     hooks:
       - id: pyproject-toml-format
         name: Format pyproject.toml
-        entry: pyproject-toml-format
+        entry: uv run --with=ruff pyproject-toml-format
         language: python
+        additional_dependencies: ["uv"]
         files: ^pyproject\.toml$
-        additional_dependencies: [".[ruff]"]
 
   - repo: https://github.com/ComPWA/taplo-pre-commit
     rev: v0.9.3

@@ -28,7 +28,7 @@ class Linter(TypedDict):
 class Rule(TypedDict):
     name: str
     code: str
-    linter: str
+    linter: str | None
     summary: str
     message_formats: list[str]
     fix: str
@@ -76,10 +76,7 @@ def format_ruff_lint_ignore(pyproject_toml: tomlkit.TOMLDocument) -> bool:
     linter_weights_by_prefix = {i[0]: idx for idx, i in enumerate(linter_prefixes)}
 
     rules_by_code = {rule['code']: rule for rule in rules_data}
-
-    linter_weights_by_name = {linter['name']: idx for idx, linter in enumerate(linters_data)}
-
-    rule_weights = {rule['code']: (linter_weights_by_name[rule['linter']], rule['code']) for rule in rules_data}
+    rule_weights = {rule['code']: n for n, rule in enumerate(rules_data)}
 
     raw_codes = tool_ruff_lint.get('ignore', [])
     out_linters = []
